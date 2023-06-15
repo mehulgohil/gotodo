@@ -5,6 +5,8 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mehulgohil/gotodo/service"
+	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -15,7 +17,28 @@ var searchCmd = &cobra.Command{
 	Short: "Search a todo task",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("search called")
+		keyword, err := cmd.Flags().GetString("keyword")
+		if err != nil {
+			log.Fatal(err)
+		}
+		duedate, err := cmd.Flags().GetString("duedate")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		tasks, err := service.SearchTodoTask(keyword, duedate)
+		if err != nil {
+			return
+		}
+
+		if len(tasks.Todos) == 0 {
+			fmt.Println("There are no tasks with given search filter.")
+			return
+		}
+
+		for _, eachTask := range tasks.Todos {
+			fmt.Printf("%+v\n", eachTask)
+		}
 	},
 }
 
@@ -31,4 +54,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// searchCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	searchCmd.Flags().StringP("keyword", "k", "", "Keyword for the task name to search for.")
+	searchCmd.Flags().StringP("duedate", "d", "", "Duedate of the task to search for.")
 }

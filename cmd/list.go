@@ -20,6 +20,9 @@ var listCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		if len(tasks.Todos) == 0 {
+			fmt.Println("There are no task added to todo list.")
+		}
 		for _, eachTask := range tasks.Todos {
 			fmt.Printf("%+v\n", eachTask)
 		}

@@ -4,6 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"github.com/mehulgohil/gotodo/service"
 	"log"
 
@@ -25,6 +26,7 @@ var removeCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Println("Task successfully removed")
 	},
 }
 
