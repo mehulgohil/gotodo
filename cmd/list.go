@@ -8,6 +8,9 @@ import (
 	"github.com/mehulgohil/gotodo/service"
 	"github.com/spf13/cobra"
 	"log"
+	"os"
+	"strconv"
+	"text/tabwriter"
 )
 
 // listCmd represents the list command
@@ -23,9 +26,15 @@ var listCmd = &cobra.Command{
 		if len(tasks.Todos) == 0 {
 			fmt.Println("There are no task added to todo list.")
 		}
+		w := tabwriter.NewWriter(os.Stdout, 10, 1, 5, ' ', 0)
+
+		fs := "%s\t%s\t%s\t%s\n"
+		fmt.Fprintf(w, fs, "ID", "Name", "Due Date", "Completed")
 		for _, eachTask := range tasks.Todos {
-			fmt.Printf("%+v\n", eachTask)
+			fmt.Fprintf(w, fs, strconv.Itoa(eachTask.ID), eachTask.Name, eachTask.DueDate, strconv.FormatBool(eachTask.Completed))
 		}
+
+		w.Flush()
 	},
 	Example: `
 # Example 1: List all tasks

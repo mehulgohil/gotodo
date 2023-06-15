@@ -7,6 +7,9 @@ import (
 	"fmt"
 	"github.com/mehulgohil/gotodo/service"
 	"log"
+	"os"
+	"strconv"
+	"text/tabwriter"
 
 	"github.com/spf13/cobra"
 )
@@ -36,9 +39,15 @@ var searchCmd = &cobra.Command{
 			return
 		}
 
+		w := tabwriter.NewWriter(os.Stdout, 10, 1, 5, ' ', 0)
+
+		fs := "%s\t%s\t%s\t%s\n"
+		fmt.Fprintf(w, fs, "ID", "Name", "Due Date", "Completed")
 		for _, eachTask := range tasks.Todos {
-			fmt.Printf("%+v\n", eachTask)
+			fmt.Fprintf(w, fs, strconv.Itoa(eachTask.ID), eachTask.Name, eachTask.DueDate, strconv.FormatBool(eachTask.Completed))
 		}
+
+		w.Flush()
 	},
 	Example: `
 # Example 1: Search for tasks with keyword and duedate
