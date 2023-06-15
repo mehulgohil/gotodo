@@ -43,6 +43,7 @@ var addCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(addCmd)
+	addFlags := addCmd.Flags()
 
 	// Here you will define your flags and configuration settings.
 
@@ -52,6 +53,8 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	addCmd.Flags().StringP("name", "n", "", "Name of the task")
-	addCmd.Flags().StringP("duedate", "d", "", "Due date of the task")
+	addFlags.StringP("name", "n", "", "Name of the task")
+	addFlags.StringP("duedate", "d", "", "Due date of the task")
+	cobra.MarkFlagRequired(addFlags, "name")
+	cobra.MarkFlagRequired(addFlags, "duedate")
 }

@@ -32,6 +32,7 @@ var completeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(completeCmd)
+	completeFlags := completeCmd.Flags()
 
 	// Here you will define your flags and configuration settings.
 
@@ -41,5 +42,6 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	completeCmd.Flags().Int("id", 0, "ID of the task")
+	completeFlags.Int("id", 0, "ID of the task")
+	cobra.MarkFlagRequired(completeFlags, "id")
 }
