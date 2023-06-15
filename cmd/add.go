@@ -39,6 +39,10 @@ var addCmd = &cobra.Command{
 		}
 		fmt.Println("Task successfully added.")
 	},
+	Example: `
+# Example 1: Add a task
+gotodo add -n test -d 12/11/23
+	`,
 }
 
 func init() {

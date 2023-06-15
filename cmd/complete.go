@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/mehulgohil/gotodo/service"
 	"log"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -16,8 +17,9 @@ var completeCmd = &cobra.Command{
 	Use:   "complete",
 	Short: "Complete a todo task",
 	Long:  ``,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		taskID, err := cmd.Flags().GetInt("id")
+		taskID, err := strconv.Atoi(args[0])
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -28,12 +30,14 @@ var completeCmd = &cobra.Command{
 		}
 		fmt.Println("Task successfully completed.")
 	},
+	Example: `
+# Example 1: complete a task
+gotodo complete 1
+	`,
 }
 
 func init() {
 	rootCmd.AddCommand(completeCmd)
-	completeFlags := completeCmd.Flags()
-
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
@@ -42,6 +46,4 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	completeFlags.Int("id", 0, "ID of the task")
-	cobra.MarkFlagRequired(completeFlags, "id")
 }

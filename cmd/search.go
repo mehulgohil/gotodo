@@ -40,6 +40,16 @@ var searchCmd = &cobra.Command{
 			fmt.Printf("%+v\n", eachTask)
 		}
 	},
+	Example: `
+# Example 1: Search for tasks with keyword and duedate
+gotodo search -k te -d 12/11/23
+
+# Example 2: Search for tasks with keyword test
+gotodo search -k test
+
+# Example 3: Search for tasks with a duedate
+gotodo search -d 12/11/23
+	`,
 }
 
 func init() {

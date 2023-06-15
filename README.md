@@ -20,9 +20,11 @@ gotodo --help
 ```
 
 ## Cobra Commands
+https://github.com/spf13/cobra-cli/blob/main/README.md
 ```bash
 cobra-cli init
 cobra-cli add list
+cobra-cli add completed -p searchCmd
 ```
 
 ## Test Commands for local testing
