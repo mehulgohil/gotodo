@@ -21,6 +21,7 @@ gotodo --help
 
 ## Cobra Commands
 https://github.com/spf13/cobra-cli/blob/main/README.md
+https://github.com/spf13/cobra/blob/main/user_guide.md
 ```bash
 cobra-cli init
 cobra-cli add list

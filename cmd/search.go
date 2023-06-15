@@ -6,12 +6,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/mehulgohil/gotodo/service"
-	"log"
-	"os"
-	"strconv"
-	"text/tabwriter"
-
+	"github.com/mehulgohil/gotodo/utility"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 // searchCmd represents the search command
@@ -28,6 +25,10 @@ var searchCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		outputFormat, err := cmd.PersistentFlags().GetString("output")
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		tasks, err := service.SearchTodoTask(keyword, duedate)
 		if err != nil {
@@ -39,15 +40,7 @@ var searchCmd = &cobra.Command{
 			return
 		}
 
-		w := tabwriter.NewWriter(os.Stdout, 10, 1, 5, ' ', 0)
-
-		fs := "%s\t%s\t%s\t%s\n"
-		fmt.Fprintf(w, fs, "ID", "Name", "Due Date", "Completed")
-		for _, eachTask := range tasks.Todos {
-			fmt.Fprintf(w, fs, strconv.Itoa(eachTask.ID), eachTask.Name, eachTask.DueDate, strconv.FormatBool(eachTask.Completed))
-		}
-
-		w.Flush()
+		utility.PrintOnOutputFormat(tasks, outputFormat)
 	},
 	Example: `
 # Example 1: Search for tasks with keyword and duedate
@@ -68,7 +61,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// searchCmd.PersistentFlags().String("foo", "", "A help for foo")
+	searchCmd.PersistentFlags().StringP("output", "o", "", "Output format [table, json, yaml]")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:

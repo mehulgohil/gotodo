@@ -6,12 +6,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/mehulgohil/gotodo/service"
-	"log"
-	"os"
-	"strconv"
-	"text/tabwriter"
-
+	"github.com/mehulgohil/gotodo/utility"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 // completedCmd represents the completed command
@@ -20,6 +17,13 @@ var completedCmd = &cobra.Command{
 	Short: "A subcommand for search to search for all completed tasks",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		// using a persistent flag defined in parent command
+		outputFormat, err := searchCmd.PersistentFlags().GetString("output")
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		tasks, err := service.SearchCompletedTask()
 		if err != nil {
 			log.Fatal(err)
@@ -30,15 +34,7 @@ var completedCmd = &cobra.Command{
 			return
 		}
 
-		w := tabwriter.NewWriter(os.Stdout, 10, 1, 5, ' ', 0)
-
-		fs := "%s\t%s\t%s\t%s\n"
-		fmt.Fprintf(w, fs, "ID", "Name", "Due Date", "Completed")
-		for _, eachTask := range tasks.Todos {
-			fmt.Fprintf(w, fs, strconv.Itoa(eachTask.ID), eachTask.Name, eachTask.DueDate, strconv.FormatBool(eachTask.Completed))
-		}
-
-		w.Flush()
+		utility.PrintOnOutputFormat(tasks, outputFormat)
 	},
 	Example: `
 # Example 1: Search for a completed task

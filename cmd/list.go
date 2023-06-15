@@ -6,11 +6,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/mehulgohil/gotodo/service"
+	"github.com/mehulgohil/gotodo/utility"
 	"github.com/spf13/cobra"
 	"log"
-	"os"
-	"strconv"
-	"text/tabwriter"
 )
 
 // listCmd represents the list command
@@ -23,18 +21,15 @@ var listCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		outputFormat, err := cmd.Flags().GetString("output")
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		if len(tasks.Todos) == 0 {
 			fmt.Println("There are no task added to todo list.")
 		}
-		w := tabwriter.NewWriter(os.Stdout, 10, 1, 5, ' ', 0)
-
-		fs := "%s\t%s\t%s\t%s\n"
-		fmt.Fprintf(w, fs, "ID", "Name", "Due Date", "Completed")
-		for _, eachTask := range tasks.Todos {
-			fmt.Fprintf(w, fs, strconv.Itoa(eachTask.ID), eachTask.Name, eachTask.DueDate, strconv.FormatBool(eachTask.Completed))
-		}
-
-		w.Flush()
+		utility.PrintOnOutputFormat(tasks, outputFormat)
 	},
 	Example: `
 # Example 1: List all tasks
@@ -53,5 +48,5 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	listCmd.Flags().StringP("output", "o", "", "Output format [table, json, yaml]")
 }
