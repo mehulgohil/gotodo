@@ -4,7 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
+	"github.com/mehulgohil/gotodo/service"
+	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -15,7 +16,15 @@ var removeCmd = &cobra.Command{
 	Short: "Remove a todo tasks",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("remove called")
+		taskID, err := cmd.Flags().GetInt("id")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = service.RemoveTodoTask(taskID)
+		if err != nil {
+			log.Fatal(err)
+		}
 	},
 }
 
@@ -30,5 +39,5 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// removeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	removeCmd.Flags().Int("id", 0, "ID of the task")
 }

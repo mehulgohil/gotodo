@@ -32,7 +32,7 @@ var addCmd = &cobra.Command{
 			Completed: false,
 		}
 
-		err = service.AddTodo(currentTodo)
+		err = service.AddTodoTask(currentTodo)
 		if err != nil {
 			log.Fatal(err)
 		}

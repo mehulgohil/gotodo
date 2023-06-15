@@ -5,8 +5,9 @@ package cmd
 
 import (
 	"fmt"
-
+	"github.com/mehulgohil/gotodo/service"
 	"github.com/spf13/cobra"
+	"log"
 )
 
 // listCmd represents the list command
@@ -15,7 +16,13 @@ var listCmd = &cobra.Command{
 	Short: "List the todo tasks",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		tasks, err := service.GetAllTodoTasks()
+		if err != nil {
+			log.Fatal(err)
+		}
+		for _, eachTask := range tasks.Todos {
+			fmt.Printf("%+v\n", eachTask)
+		}
 	},
 }
 
