@@ -27,6 +27,6 @@ cobra-cli add list
 
 ## Test Commands for local testing
 ```bash
- go run . add -n test -d test
+ go run . add -n test -d 15/06/23
 ```
 
