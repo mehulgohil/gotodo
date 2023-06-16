@@ -4,4 +4,19 @@ go-cli
 Mehul Gohil
 mehul.gohil@talentica.com
 
-* go-cli
+* CLI (Command Line Interface)
+- Text Based User Interface
+- Requires Terminal
+- Examples: terraform, kubectl, aws, az etc
+- CLIs helps us to store script to automate regular tasks.
+
+* CLIs in Go
+
+- Complies really quick.
+- The build binary can be use cross OS and architectures.
+- It requires no complicated build farms.
+- The platform running the go program doesn't requires any external dependencies or runtime.
+
+* Creating CLI the traditional way
+
+.play traditional-cli/main.go
