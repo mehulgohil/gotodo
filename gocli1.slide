@@ -1,0 +1,22 @@
+# go-cli
+
+Mehul Gohil
+19 June 2023
+mehul.gohil@talentica.com
+
+## CLI (Command Line Interface)
+
+## CLIs in Go
+
+## Creating CLI the traditional way
+
+## Snakes comes to rescue...
+
+## Setting up Cobra
+
+## Setting up Flags
+
+## Setting up Args
+
+## Viper Set up
+
