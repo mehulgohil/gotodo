@@ -41,7 +41,7 @@ var loadCmd = &cobra.Command{
 	// END OMIT
 	Example: `
 # Example 1: Remove a task with id 1
-gotodo load --jsonfile existingFile.json
+gotodo load --jsonFile existingFile.json
 	`,
 }
 

@@ -17,6 +17,8 @@ mehul.gohil@talentica.com
 - It requires no complicated build farms.
 - The platform running the go program doesn't requires any external dependencies or runtime.
 
+.image cli.jpg
+
 ## Creating CLI the traditional way
 
 .play traditional-cli/main.go
