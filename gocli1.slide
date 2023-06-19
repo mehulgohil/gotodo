@@ -1,7 +1,89 @@
-# Test
+go-cli
 
 Mehul Gohil
 19 June 2023
-Mehul.Gohil@gmail.com
+mehul.gohil@talentica.com
 
-## CLI (Command Line Interface)
+* CLI (Command Line Interface)
+- Text Based User Interface
+- Requires Terminal
+- Examples: terraform, kubectl, aws, az etc
+- CLIs helps us to store script to automate regular tasks.
+
+* CLIs in Go
+
+- Complies really quick.
+- The build binary can be use cross OS and architectures.
+- It requires no complicated build farms.
+- The platform running the go program doesn't requires any external dependencies or runtime.
+
+.image cli.jpg
+
+* Creating CLI the traditional way
+
+.play traditional-cli/main.go
+
+* Snakes comes to rescue...
+
+- Cobra
+
+    - Library
+    - Nested Subcommands
+    - Global, Local and Cascading Flags
+    - Automatic Help Commands
+    - Fully POSIX-compliant flags (including short & long versions)
+
+- Viper
+
+    - Complete configuration solution
+    - Setting defaults
+    - Reading from JSON, TOML, YAML, HCL etc
+
+* Setting up Cobra
+
+    cobra-cli init gotodo               # To initialize the main command
+
+    cobra-cli add list                  # To add additional command
+
+Sub Command
+
+    cobra-cli add search                # To add search command
+
+    cobra-cli add search completed      # To add a subcommand completed to search command
+
+Usage
+
+    gotodo list                         # Command use to list of all the todo tasks
+
+    gotodo search                       # Command use to search the task
+
+    gotodo search completed             # `completed` subcommand to search for all completed tasks
+
+* Setting up Flags
+- Local Flags (Assigned to single command)
+
+        searchCmd.Flags().StringP("keyword", "k", "", "Keyword for the task name to search for.")
+Usage
+
+    gotodo search -k test
+
+- Persistent Flags (Assigned to command and sub command)
+
+        searchCmd.PersistentFlags().StringP("output", "o", "", "Output format [table, json, yaml]")
+Usage
+
+    gotodo search -o yaml
+
+* Setting up Args
+.code cmd/complete.go /^//START/,/^//END/
+
+Usage
+
+    gotodo complete 1                         # Command to complete task 1
+
+* Viper Set up
+.code cmd/load.go /^//START/,/^//END/
+
+Usage
+
+    gotodo load --jsonFile storage1.json      # Command to load existing json tasks
