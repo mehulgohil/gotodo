@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	name := flag.String("name", "", "The name to greet")
+	name := flag.String("name", "mehul", "The name to greet")
 	flag.Parse()
 
 	fmt.Println("Hello,", *name)
