@@ -19,6 +19,17 @@ mehul.gohil@talentica.com
 
 .image cli.jpg
 
+* Popular CLI tools written in Golang
+
+- Docker
+- Kubernetes
+- Terraform
+- Git
+- Protoc Compiler (Used in gRPC)
+- Minikube CLI
+- Prometheus
+- Hugo
+
 * Creating CLI the traditional way
 
 .play traditional-cli/main.go
