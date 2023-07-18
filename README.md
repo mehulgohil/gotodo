@@ -1,5 +1,7 @@
 # gotodo
-A todo task implemented in Golang
+A todo task implemented in Golang using Cobra and Viper Library.
+
+[go-slide](https://go-talks.appspot.com/github.com/mehulgohil/gotodo/gocli1.slide#1)
 
 ## Requirement
 Add a task: Users should be able to add a new task to their to-do list along with a due date.

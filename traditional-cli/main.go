@@ -3,11 +3,25 @@ package main
 import (
 	"flag"
 	"fmt"
+	"time"
 )
 
 func main() {
-	name := flag.String("name", "mehul", "The name to greet")
+	command := flag.String("command", "", "Command to execute")
 	flag.Parse()
 
-	fmt.Println("Hello,", *name)
+	if *command == "" {
+		fmt.Println("Please provide a command.")
+		flag.Usage()
+		return
+	}
+
+	switch *command {
+	case "greet":
+		fmt.Println("Hello, World!")
+	case "time":
+		fmt.Println("Current time:", time.Now().Format("15:04:05"))
+	default:
+		fmt.Println("Unknown command:", command)
+	}
 }
